@@ -51,6 +51,8 @@ jobs:
   crawl:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      NODE_VERSION: 24   # ✅ 在这里定义环境变量
 
     steps:
       - name: Checkout repository
@@ -58,6 +60,11 @@ jobs:
         with:
           fetch-depth: 1
           clean: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}   # ✅ 使用变量
 
       - name: Check Expiration
         env:
